@@ -4,4 +4,5 @@ from .views import GameOpeningView
 
 urlpatterns = [
     path('analysis', GameOpeningView.as_view()),
+    path('create-opening', CreateGameOpeningView.as_view()),
 ]

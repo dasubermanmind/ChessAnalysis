@@ -12,6 +12,7 @@ from .models import GameOpenings
 class GameOpeningView(generics.CreateAPIView):
     querset = GameOpenings.objects.all()
     serializer_class = GameOpeningsSerializers
+#end
 
 class CreateGameOpeningView(APIView):
     serializer = CreateGameOpeningSerializer
@@ -38,11 +39,11 @@ class CreateGameOpeningView(APIView):
                 self.request.session['openingName'] = gameOpening.openingName
                 return Response(CreateGameOpeningSerializer(gameOpening).data, status=status.HTTP_200_OK)
             else:
-                gameOpening = GameOpenings()
+                gameOpening = GameOpenings(openingName,winner,whiteRating,blackRating)
                 gameOpening.save()
                 self.request.session['openingName'] = gameOpening.openingName
                 return Response(CreateGameOpeningSerializer(gameOpening).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
+#end
 

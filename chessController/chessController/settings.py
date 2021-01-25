@@ -11,11 +11,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = []
 # Application definition
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY', default="unsafe-secret-key")
+
+DEBUG = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
